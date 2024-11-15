@@ -1,0 +1,94 @@
+{
+  "isNewTest": true,
+  "name": "Demo Blaze Load Test",
+  "creatorClientId": "gui",
+  "overrideExecutions": [
+    {
+      "executor": "jmeter",
+      "holdFor": "19m",
+      "rampUp": "1m",
+      "concurrency": 20,
+      "locations": {
+        "us-east4-a": 20
+      },
+      "locationsPercents": {
+        "us-east4-a": 100
+      },
+      "steps": 0
+    }
+  ],
+  "executions": [
+    {
+      "concurrency": 20,
+      "usersNotConfigured": false,
+      "holdFor": "19m",
+      "durationIsNotConfigured": false,
+      "iterationAndDurationDisabled": false,
+      "rampUp": "1m",
+      "steps": 0,
+      "locations": {
+        "us-east4-a": 20
+      },
+      "locationsPercents": {
+        "us-east4-a": 100
+      },
+      "executor": "jmeter",
+      "scenario": "default-scenario-14485266"
+    }
+  ],
+  "hasThreadGroupsToOverride": false,
+  "hasNonRegularThreadGroup": false,
+  "hasMultipleThreadGroups": false,
+  "shouldSendReportEmail": true,
+  "dependencies": [],
+  "shouldRemoveJmeter": true,
+  "configuration": {
+    "type": "taurus",
+    "dedicatedIpsEnabled": false,
+    "designatedJmeterVersions": [
+      "5.4.2"
+    ],
+    "canControlRampup": false,
+    "targetThreads": 500,
+    "executionType": "taurusCloud",
+    "enableFailureCriteria": false,
+    "enableMockServices": false,
+    "enableLoadConfiguration": true,
+    "scriptType": "jmeter",
+    "threads": 500,
+    "filename": "demoblaze.jmx",
+    "testMode": "script",
+    "extraSlots": 0,
+    "plugins": {
+      "jmeter": {
+        "version": "auto",
+        "consoleArgs": "",
+        "enginesArgs": "",
+        "versionInfo": [
+          {
+            "key": "stable",
+            "text": "Stable",
+            "number": "5.5",
+            "enabled": true
+          },
+          {
+            "key": "latest",
+            "text": "Latest",
+            "number": "5.6.3",
+            "enabled": true
+          },
+          {
+            "key": "auto",
+            "text": "Auto Detect",
+            "number": "",
+            "enabled": true
+          }
+        ]
+      },
+      "thresholds": {
+        "thresholds": [],
+        "fromTaurus": false
+      }
+    }
+  }
+}
