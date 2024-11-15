@@ -1,0 +1,19 @@
+execution:
+  - scenario: default-scenario
+    hold-for: 4m
+    ramp-up: 1m
+    concurrency: 5
+    locations:
+      us-east4-a: 5
+    steps: 0
+
+scenarios:
+  default-scenario:
+    requests:
+      - url: https://www.blazedemo.com
+        method: GET
+        label: Login
+      - url: https://www.demoblaze.com
+        method: GET
+        label: DemoBlaze
+    retrieve-resources: false
