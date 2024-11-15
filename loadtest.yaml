@@ -16,7 +16,7 @@ modules:
     # following instructions will have effect when no per-reporter settings
     report-name: VSC Example
     test: VSC Example
-    project: Default
+    project: 2426852
 
 
 
