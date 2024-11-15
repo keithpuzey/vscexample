@@ -1,8 +1,8 @@
 execution:
   - scenario: default-scenario
-    hold-for: 6m
+    hold-for: 1m
     ramp-up: 1m
-    concurrency: 15
+    concurrency: 5
     locations:
       us-east4-a: 5
     steps: 0
