@@ -32,12 +32,12 @@ execution:
 scenarios:
   default-scenario:
     requests:
-      - url: https://www.google.com
+      - url: https://www.dbankdemo.com
         method: GET
-        label: google
-      - url: https://www.google.com?id=${id}
+        label: Login
+      - url: https://www.dbankdemo.com?id=${id}
         method: GET
-        label: google2
+        label: DigitalBank
     retrieve-resources: false
     
     data-sources: # list of external data sources
