@@ -1,15 +1,14 @@
 {
   "isNewTest": true,
-  "name": "Demo Blaze Load Test",
-  "creatorClientId": "gui",
+   "creatorClientId": "gui",
   "overrideExecutions": [
     {
       "executor": "jmeter",
       "holdFor": "19m",
       "rampUp": "1m",
-      "concurrency": 20,
+      "concurrency": 200,
       "locations": {
-        "us-east4-a": 20
+        "us-east4-a": 200
       },
       "locationsPercents": {
         "us-east4-a": 100
@@ -19,7 +18,7 @@
   ],
   "executions": [
     {
-      "concurrency": 20,
+      "concurrency": 200,
       "usersNotConfigured": false,
       "holdFor": "19m",
       "durationIsNotConfigured": false,
@@ -27,13 +26,13 @@
       "rampUp": "1m",
       "steps": 0,
       "locations": {
-        "us-east4-a": 20
+        "us-east4-a": 200
       },
       "locationsPercents": {
         "us-east4-a": 100
       },
       "executor": "jmeter",
-      "scenario": "default-scenario-14485266"
+      "scenario": "default-scenario-14485408"
     }
   ],
   "hasThreadGroupsToOverride": false,
