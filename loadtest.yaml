@@ -21,7 +21,7 @@ scenarios:
     retrieve-resources: false
     
     data-sources: # list of external data sources
-    - path: ./VSCodeExamples/csvdata.csv  # this is a full form
+    - path: csvdata.csv  # this is a full form
       delimiter: ','
       quoted: false
       encoding: "utf-8"
