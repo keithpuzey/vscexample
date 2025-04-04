@@ -1,6 +1,6 @@
 modules:
   blazemeter:
-    token: f20fb0c1a7d1c72a9736c749:7f75d1962f11f365dd59f04d27616a331dd208b7d3d43d26bd3ed69ed7d67435bbe1d0cb
+    token: f2c749:7f
     address: https://a.blazemeter.com  # reporting service address
     data-address: https://data.blazemeter.com  # data service address
     browser-open: start  # auto-open the report in browser,
