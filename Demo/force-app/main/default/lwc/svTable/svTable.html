@@ -1,0 +1,38 @@
+<template>
+    <lightning-card title="BlazeMeter SV Account Demo">
+        <div class="slds-m-around_medium slds-grid slds-gutters">
+            <lightning-input 
+                label="Enter Account ID" 
+                value={accountId} 
+                onchange={handleAccountIdChange}
+                class="slds-col">
+            </lightning-input>
+
+            <lightning-button 
+                label="Submit" 
+                onclick={handleSubmit} 
+                variant="brand"
+                class="slds-col">
+            </lightning-button>
+
+            <lightning-button 
+                label="Refresh" 
+                onclick={handleRefresh} 
+                variant="neutral"
+                class="slds-col">
+            </lightning-button>
+        </div>
+
+        <template if:true={data}>
+            <lightning-datatable
+                key-field="accountId"
+                data={data}
+                columns={columns}>
+            </lightning-datatable>
+        </template>
+
+        <template if:true={error}>
+            <p class="slds-text-color_error">{error}</p>
+        </template>
+    </lightning-card>
+</template>

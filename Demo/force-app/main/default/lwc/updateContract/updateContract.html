@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Update Contract">
+        <div class="slds-p-around_medium">
+            <!-- Input for Account ID -->
+            <lightning-input
+                label="Enter Account ID"
+                value={accountId}
+                onchange={handleAccountIdChange}>
+            </lightning-input>
+
+            <!-- Input for Contract Value -->
+            <lightning-input
+                label="Enter Contract Value"
+                value={contractValue}
+                onchange={handleContractValueChange}>
+            </lightning-input>
+
+            <!-- Submit button -->
+            <lightning-button
+                label="Submit"
+                variant="brand"
+                class="slds-m-top_small"
+                onclick={handleSubmit}>
+            </lightning-button>
+
+            <!-- Display success response -->
+            <template if:true={response}>
+                <p class="slds-text-color_success slds-m-top_small">Response: {response}</p>
+            </template>
+
+            <!-- Display error message -->
+            <template if:true={error}>
+                <p class="slds-text-color_error slds-m-top_small">Error: {error}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>
