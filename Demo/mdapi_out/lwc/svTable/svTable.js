@@ -8,7 +8,6 @@ export default class SvTable extends LightningElement {
     @track columns = [];
     @track error;
 
-    // Removed initialWidth to allow the table to handle responsiveness
     defaultColumns = [
         { label: 'Account Id', fieldName: 'accountId' },
         { label: 'Account Name', fieldName: 'accountName' },
@@ -21,14 +20,10 @@ export default class SvTable extends LightningElement {
     ];
 
     connectedCallback() {
-        this.isMobile = window.innerWidth <= 768; // simple mobile detection
+        this.isMobile = window.innerWidth <= 768;
         window.addEventListener('resize', () => {
             this.isMobile = window.innerWidth <= 768;
         });
-    }
-
-    checkIfMobile() {
-        this.isMobile = window.innerWidth <= 768; // adjust breakpoint as needed
     }
 
     handleAccountIdChange(event) {
@@ -56,7 +51,16 @@ export default class SvTable extends LightningElement {
     loadData(accountId) {
         getAccountData({ accountId })
             .then(result => {
-                this.data = result;
+                // Map the data to add a unique 'id' field for the key-field attribute.
+                // Also, flatten the poundRate field as before.
+                this.data = result.map((row, index) => {
+                    return {
+                        ...row,
+                        // Create a unique ID for each row to satisfy the datatable's key-field requirement.
+                        id: `row-${index}-${row.accountId}`, 
+                        poundRate: row.poundRate?.data?.GBP ?? null
+                    };
+                });
                 this.columns = this.defaultColumns;
             })
             .catch(error => {

@@ -1,6 +1,5 @@
 <template>
     <lightning-card title="BlazeMeter SV Data">
-        <!-- Account ID input -->
         <div class="slds-m-around_medium">
             <lightning-input 
                 label="Enter Account ID" 
@@ -9,7 +8,6 @@
             </lightning-input>
         </div>
 
-        <!-- Buttons -->
         <div class="slds-m-around_medium slds-grid slds-gutters">
             <div class="slds-col">
                 <lightning-button label="Submit" onclick={handleSubmit}></lightning-button>
@@ -19,13 +17,11 @@
             </div>
         </div>
 
-        <!-- Desktop Table -->
         <template if:true={data}>
             <template if:false={isMobile}>
                 <div style="overflow-x:auto;">
                     <lightning-datatable 
-                        key-field="accountId" 
-                        data={data} 
+                        key-field="id" data={data} 
                         columns={columns} 
                         hide-checkbox-column 
                         column-widths-mode="auto">
@@ -34,11 +30,10 @@
             </template>
         </template>
 
-        <!-- Mobile Cards -->
         <template if:true={data}>
             <template if:true={isMobile}>
                 <template for:each={data} for:item="row">
-                    <div key={row.accountId} class="slds-box slds-m-around_small">
+                    <div key={row.id} class="slds-box slds-m-around_small">
                         <p><b>Account Id:</b> {row.accountId}</p>
                         <p><b>Account Name:</b> {row.accountName}</p>
                         <p><b>First Name:</b> {row.firstName}</p>
@@ -52,7 +47,6 @@
             </template>
         </template>
 
-        <!-- Error message -->
         <template if:true={error}>
             <p class="slds-text-color_error slds-m-around_medium">{error}</p>
         </template>
