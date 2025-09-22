@@ -1,60 +1,76 @@
 <template>
-    <lightning-card title="BlazeMeter SV Data">
-        <!-- Account ID input -->
-        <div class="slds-m-around_medium">
+    <lightning-card title="Virtualised Service Example" icon-name="utility:apps">
+        <div class="slds-p-around_medium">
+            <!-- Account ID input -->
             <lightning-input 
                 label="Enter Account ID" 
                 value={accountId} 
                 onchange={handleAccountIdChange}>
             </lightning-input>
-        </div>
 
-        <!-- Buttons -->
-        <div class="slds-m-around_medium slds-grid slds-gutters">
-            <div class="slds-col">
-                <lightning-button label="Submit" onclick={handleSubmit}></lightning-button>
-            </div>
-            <div class="slds-col">
-                <lightning-button label="Refresh" onclick={handleRefresh}></lightning-button>
-            </div>
-        </div>
-
-        <!-- Desktop Table -->
-        <template if:true={data}>
-            <template if:false={isMobile}>
-                <div style="overflow-x:auto;">
-                    <lightning-datatable 
-                        key-field="accountId" 
-                        data={data} 
-                        columns={columns} 
-                        hide-checkbox-column 
-                        column-widths-mode="auto">
-                    </lightning-datatable>
+            <!-- Buttons -->
+            <div class="slds-m-top_medium slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-button 
+                        label="Submit" 
+                        variant="brand" 
+                        onclick={handleSubmit}>
+                    </lightning-button>
                 </div>
-            </template>
-        </template>
+                <div class="slds-col">
+                    <lightning-button 
+                        label="Refresh" 
+                        variant="neutral" 
+                        onclick={handleRefresh}>
+                    </lightning-button>
+                </div>
+            </div>
 
-        <!-- Mobile Cards -->
-        <template if:true={data}>
-            <template if:true={isMobile}>
-                <template for:each={data} for:item="row">
-                    <div key={row.accountId} class="slds-box slds-m-around_small">
-                        <p><b>Account Id:</b> {row.accountId}</p>
-                        <p><b>Account Name:</b> {row.accountName}</p>
-                        <p><b>First Name:</b> {row.firstName}</p>
-                        <p><b>Last Name:</b> {row.lastName}</p>
-                        <p><b>Email:</b> {row.email}</p>
-                        <p><b>Street:</b> {row.street}</p>
-                        <p><b>Cost of Contract:</b> {row.contractCost}</p>
-                        <p><b>UK Rate:</b> {row.poundRate}</p>
+            <!-- Desktop Table -->
+            <template if:true={data}>
+                <template if:false={isMobile}>
+                    <div class="slds-m-top_medium" style="overflow-x:auto;">
+                        <lightning-datatable 
+                            key-field="accountId" 
+                            data={data} 
+                            columns={columns} 
+                            hide-checkbox-column 
+                            column-widths-mode="auto" 
+                            resize-column-disabled="false">
+                        </lightning-datatable>
                     </div>
                 </template>
             </template>
-        </template>
 
-        <!-- Error message -->
-        <template if:true={error}>
-            <p class="slds-text-color_error slds-m-around_medium">{error}</p>
-        </template>
+            <!-- Mobile Cards -->
+            <template if:true={data}>
+                <template if:true={isMobile}>
+                    <div class="slds-m-top_medium">
+                        <template for:each={data} for:item="row">
+                            <div key={row.accountId} class="slds-box slds-box_xx-small slds-m-bottom_small">
+                                <p class="slds-text-title_bold">Account Id: {row.accountId}</p>
+                                <p><b>Account Name:</b> {row.accountName}</p>
+                                <p><b>First Name:</b> {row.firstName}</p>
+                                <p><b>Last Name:</b> {row.lastName}</p>
+                                <p><b>Email:</b> {row.email}</p>
+                                <p><b>Street:</b> {row.street}</p>
+                                <p><b>Cost of Contract:</b> {row.contractCost}</p>
+                                <p><b>UK Rate:</b> {row.poundRate}</p>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </template>
+
+            <!-- Error message -->
+            <template if:true={error}>
+                <p class="slds-text-color_error slds-m-top_medium">{error}</p>
+            </template>
+        </div>
+
+        <!-- Footer -->
+        <div slot="footer" class="slds-p-around_small slds-text-body_small slds-text-color_weak slds-text-align_right slds-border_top">
+            Last updated: {lastUpdatedDate}
+        </div>
     </lightning-card>
 </template>

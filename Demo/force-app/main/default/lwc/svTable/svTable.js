@@ -2,33 +2,35 @@ import { LightningElement, track } from 'lwc';
 import getAccountData from '@salesforce/apex/BlazeMeterSVService.getAccountData';
 
 export default class SvTable extends LightningElement {
-    @track accountId = '';
+    @track accountId = '12345'; // default account on load
     @track data = [];
     @track isMobile = false;
     @track columns = [];
     @track error;
+    @track lastUpdatedDate;
 
-    // Removed initialWidth to allow the table to handle responsiveness
+    // Dynamic columns with initial widths and wrapText
     defaultColumns = [
-        { label: 'Account Id', fieldName: 'accountId' },
-        { label: 'Account Name', fieldName: 'accountName' },
-        { label: 'First Name', fieldName: 'firstName' },
-        { label: 'Last Name', fieldName: 'lastName' },
-        { label: 'Email', fieldName: 'email' },
-        { label: 'Street', fieldName: 'street' },
-        { label: 'Cost of Contract', fieldName: 'contractCost' },
-        { label: 'UK Rate', fieldName: 'poundRate' }
+        { label: 'Account Id', fieldName: 'accountId', wrapText: true, initialWidth: 120 },
+        { label: 'Account Name', fieldName: 'accountName', wrapText: true, initialWidth: 180 },
+        { label: 'First Name', fieldName: 'firstName', wrapText: true, initialWidth: 120 },
+        { label: 'Last Name', fieldName: 'lastName', wrapText: true, initialWidth: 120 },
+        { label: 'Email', fieldName: 'email', wrapText: true, initialWidth: 220 },
+        { label: 'Street', fieldName: 'street', wrapText: true, initialWidth: 200 },
+        { label: 'Cost of Contract', fieldName: 'contractCost', wrapText: true, initialWidth: 160 },
+        { label: 'UK Rate', fieldName: 'poundRate', wrapText: true, initialWidth: 100 }
     ];
 
     connectedCallback() {
-        this.isMobile = window.innerWidth <= 768; // simple mobile detection
-        window.addEventListener('resize', () => {
-            this.isMobile = window.innerWidth <= 768;
-        });
+        this.checkIfMobile();
+        window.addEventListener('resize', () => this.checkIfMobile());
+
+        // Load default account on page load
+        this.loadData(this.accountId);
     }
 
     checkIfMobile() {
-        this.isMobile = window.innerWidth <= 768; // adjust breakpoint as needed
+        this.isMobile = window.innerWidth <= 768;
     }
 
     handleAccountIdChange(event) {
@@ -56,8 +58,20 @@ export default class SvTable extends LightningElement {
     loadData(accountId) {
         getAccountData({ accountId })
             .then(result => {
-                this.data = result;
+                // Map UK Rate to formatted GBP string
+                this.data = result.map(item => {
+                    const gbpRate = item.poundRate?.data?.GBP ?? null;
+                    return {
+                        ...item,
+                        poundRate: gbpRate !== null
+                            ? new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP' }).format(gbpRate)
+                            : ''
+                    };
+                });
+
                 this.columns = this.defaultColumns;
+                this.lastUpdatedDate = new Date().toLocaleString();
+                this.error = undefined;
             })
             .catch(error => {
                 this.error = error.body ? error.body.message : error.message;
